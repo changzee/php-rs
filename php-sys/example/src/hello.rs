@@ -14,7 +14,7 @@ extern "C" fn zif_confirm_hello_compiled(_execute_data: *mut zend_execute_data, 
 
 #[no_mangle]
 pub extern "C" fn get_module() -> *const zend_module_entry {
-    let mut hello_functions = Box::new(vec![
+    let hello_functions = vec![
         // PHP_FE
         zend_function_entry {
             fname: CString::new("confirm_hello_compiled").unwrap().into_raw(),
@@ -30,7 +30,7 @@ pub extern "C" fn get_module() -> *const zend_module_entry {
             num_args: 0,
             flags: 0,
         },
-    ]);
+    ];
 
     let mut hello_module_entry : Box<zend_module_entry> = Default::default();
     hello_module_entry.zend_api = 20170718;
@@ -38,8 +38,8 @@ pub extern "C" fn get_module() -> *const zend_module_entry {
     hello_module_entry.size = mem::size_of::<zend_module_entry>() as std::os::raw::c_ushort;
     hello_module_entry.name = CString::new(PHP_MODULE_NAME).unwrap().into_raw();
     hello_module_entry.version = CString::new(PHP_HELLO_VERSION).unwrap().into_raw();
-    hello_module_entry.functions = hello_functions.as_mut_ptr();
+    hello_module_entry.functions = hello_functions.as_ptr();
 
     mem::forget(hello_functions);
-    Box::leak(hello_module_entry) as *const zend_module_entry
+    Box::into_raw(hello_module_entry) as *const zend_module_entry
 }
