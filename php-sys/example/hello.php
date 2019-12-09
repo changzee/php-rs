@@ -1,7 +1,6 @@
 <?php
 $br = (php_sapi_name() == "cli")? "":"<br>";
 
-
 if(!extension_loaded('hello')) {
 	dl('hello.' . PHP_SHLIB_SUFFIX);
 }

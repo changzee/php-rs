@@ -10,5 +10,8 @@ build = "build.rs"
 
 [dependencies]
 
+[lib]
+crate-type = ["rlib"]
+
 [build-dependencies]
 bindgen = "0.51.1"
