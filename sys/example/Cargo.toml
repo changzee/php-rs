@@ -11,4 +11,4 @@ name = "hello"
 crate-type = ["cdylib"]
 
 [dependencies]
-php-sys = {path = "..", version = "0.1.0"}
+sys = {path = "..", version = "0.1.0"}

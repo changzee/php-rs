@@ -1,6 +1,6 @@
-extern crate php_sys;
+extern crate sys;
 
-use php_sys::*;
+use sys::*;
 use std::mem;
 use std::ptr;
 use std::ffi::CString;
